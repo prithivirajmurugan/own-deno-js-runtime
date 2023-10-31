@@ -2,18 +2,19 @@ console.log("Hello","run.js!");
 console.error("Boom!");
 
 const path = '/Users/Z009TZW/Documents/my_files/my-own-js-runtime/log.txt'
-runjs.createFile(path);
-runjs.writeFile(path,"I am a log file");
+await runjs.createFile(path);
+await runjs.writeFile(path,"I am a log file");
 try {
-    const contents = runjs.readFile(path);
-    console.log("Read from a file",contents);
+    const contents = await runjs.readFile(path);
+    console.log("From File",contents);
 } catch(err) {
     console.error("Unable to read file",path,err)
 }
-
-runjs.writeFile(path,"I can write to a file.");
-const contents = runjs.readFile(path);
-console.log("Read from a file",path,"contents:",contents);
 console.log("Removing file",path);
-runjs.removeFile(path);
+await runjs.removeFile(path);
 console.log("File removed");
+
+const content = await runjs.fetch(
+  "https://example.com/",
+);
+console.log("Content from fetch", content);
